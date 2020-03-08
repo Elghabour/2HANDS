@@ -94,7 +94,7 @@ public class homeActivity extends AppCompatActivity implements
         notificationsTitle = findViewById(R.id.notificationsTitle);
 
         //category spinner declaration
-        catsStrings = getResources().getStringArray(R.array.categories);
+        catsStrings = getEnglishStringArray(R.array.categories);
         catsSpinner = findViewById(R.id.catsSpinner);
         profile_image = findViewById(R.id.profile_image);
         final String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -254,8 +254,8 @@ public class homeActivity extends AppCompatActivity implements
                     public void onCancelled(@NonNull DatabaseError databaseError) { }
                 });
 
-        catsSpinner.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
 
+        catsSpinner.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
             @Override public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
                 loadPosts(position);
             }
@@ -273,6 +273,27 @@ public class homeActivity extends AppCompatActivity implements
         navigateHome();
 
     }//////////////////////////////////end of onCreate method
+
+
+
+    /////////////////////////////////////////////////////////////
+    // changing the language only to get english Array strings //
+    // for categories to be able to load posts correctly.......//
+    /////////////////////////////////////////////////////////////
+    @NonNull
+    protected String[] getEnglishStringArray(int list) {
+        Configuration configuration = getEnglishConfiguration();
+
+        return this.createConfigurationContext(configuration).getResources().getStringArray(list);
+    }
+
+    @NonNull
+    private Configuration getEnglishConfiguration() {
+        Configuration configuration = new Configuration(this.getResources().getConfiguration());
+        configuration.setLocale(new Locale("en"));
+        return configuration;
+    }////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////
 
 
 

@@ -31,16 +31,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class searchItemFragment extends Fragment {
+
     private OnListFragmentInteractionListener mListener;
     final List<User> users = new ArrayList<>();
-
 
     public searchItemFragment() {
     }
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
 
     }
 
@@ -98,7 +97,7 @@ public class searchItemFragment extends Fragment {
         return view;
     }
 
-    void loadUsersData(@NonNull Task<QuerySnapshot> task , View view ){
+    private void loadUsersData(@NonNull Task<QuerySnapshot> task , View view ){
         for (DocumentSnapshot doc : task.getResult()) {
             users.add(doc.toObject(User.class));
         }

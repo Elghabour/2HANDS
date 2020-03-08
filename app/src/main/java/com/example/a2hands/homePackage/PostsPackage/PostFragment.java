@@ -1,6 +1,7 @@
 package com.example.a2hands.homePackage.PostsPackage;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -32,6 +33,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 
 public class PostFragment extends Fragment {
@@ -60,7 +62,7 @@ public class PostFragment extends Fragment {
         uid=FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         if (bundle.getString("for").equals("home") ) {
-            selectedCat = bundle.getString("category", "General");
+            selectedCat = bundle.getString("category", getEnglishString(R.string.general));
             getUser(new Callback() {
                 @Override
                 public void callbackUser(User user) {
@@ -115,6 +117,26 @@ public class PostFragment extends Fragment {
     }
 
 
+    ///////////////////////////////////////////////////////////
+    // changing the language only to get english strings for //
+    // categories to be able to load posts correctly ....... //
+    ///////////////////////////////////////////////////////////
+    @NonNull
+    protected String getEnglishString(int word) {
+        Configuration configuration = getEnglishConfiguration();
+
+        return getContext().createConfigurationContext(configuration).getResources().getString(word);
+    }
+
+    @NonNull
+    private Configuration getEnglishConfiguration() {
+        Configuration configuration = new Configuration(getContext().getResources().getConfiguration());
+        configuration.setLocale(new Locale("en"));
+        return configuration;
+    }////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////
+
+
     public void getPostsForHome(final List<String> location,final String category,final View view ){
         final List<Post> posts = new ArrayList<>();
 
@@ -122,7 +144,7 @@ public class PostFragment extends Fragment {
         Query query = FirebaseFirestore.getInstance().collection("/posts")
                 .whereIn("location", location);
 
-        if(!category.equals("General")){
+        if(!category.equals(getEnglishString(R.string.general))){
             query = query.whereEqualTo("category",category);
         }
 
