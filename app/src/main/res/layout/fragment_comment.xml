@@ -4,12 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:paddingStart="16dp"
-    android:paddingTop="8dp"
-    android:paddingEnd="16dp">
+    android:padding="16dp">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
@@ -17,9 +15,9 @@
             android:id="@+id/commentOwnerPic"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:src="@drawable/male"
             app:civ_border_overlay="false"
-            app:civ_border_width="0dp" />
+            app:civ_border_width="0dp"
+            android:src="@drawable/male" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -33,7 +31,6 @@
                 android:id="@+id/commentOwner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
                 android:layout_marginBottom="4dp"
                 android:textColor="@color/colorDark"
                 android:textSize="15sp"
@@ -43,8 +40,6 @@
                 android:id="@+id/commentContent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="left"
-                android:textAlignment="gravity"
                 android:textColor="@color/colorDark"
                 android:textSize="15sp" />
 
@@ -58,7 +53,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
         android:paddingStart="66dp"
@@ -87,7 +82,7 @@
             android:id="@+id/commentReplyBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="16dp"
             android:clickable="true"
             android:focusable="auto"
             android:text="@string/reply"
